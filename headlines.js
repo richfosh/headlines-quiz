@@ -102,7 +102,7 @@ function start() {
     clear("top");
     clear("buttons");
 
-    document.getElementById("top").insertAdjacentHTML("beforeend", `<h3>Question ${progress} of ${howManyQs}</h3>`);
+    document.getElementById("top").insertAdjacentHTML("beforeend", `<h4>Headline ${progress} of ${howManyQs}:</h4>`);
 
     let optionArray = [];
     let uniqueNumbers = new Set();
@@ -133,7 +133,7 @@ function start() {
     usedHeadlines.push(correctHeadline);
     // --- END OF CHANGE ---
 
-    document.getElementById("top").insertAdjacentHTML("beforeend", `<h3><em>"${correctHeadline}"</em></h3>`);
+    document.getElementById("top").insertAdjacentHTML("beforeend", `<h3><em>"${correctHeadline}"</em></h3><h4>Choose one of these papers:</h4>`);
 
     optionArray.forEach((paperIdx, i) => {
         const btn = document.createElement("button");
@@ -179,7 +179,7 @@ function finish() {
     clear("top");
     clear("buttons");
     
-    document.getElementById("top").insertAdjacentHTML("beforeend", `<h2>Final Score: ${score} / ${howManyQs}</h2><hr>`);
+    document.getElementById("top").insertAdjacentHTML("beforeend", `<br><h3>Final Score: ${score} / ${howManyQs}</h3><hr>`);
 
     summaryArray.forEach((item, index) => {
         const div = document.createElement("div");
