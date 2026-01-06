@@ -133,7 +133,9 @@ function start() {
     usedHeadlines.push(correctHeadline);
     // --- END OF CHANGE ---
 
-    document.getElementById("top").insertAdjacentHTML("beforeend", `<h3><em>"${correctHeadline}"</em></h3><h4>Choose one of these papers:</h4>`);
+    document.getElementById("top").insertAdjacentHTML("beforeend", `<h3><em>"${correctHeadline}"</em></h3>`);
+	
+	document.getElementById("choose").insertAdjacentHTML("beforeend", `<h4>Choose one of these papers:</h4>`);
 
     optionArray.forEach((paperIdx, i) => {
         const btn = document.createElement("button");
@@ -154,14 +156,25 @@ function start() {
 
 function handleResult(isCorrect, paperIdx, headIdx, userChoice) {
     clear("buttons");
+	clear("choose")
     const headlineObj = masterArray[paperIdx][headIdx];
+	const paperObj = masterArray[paperIdx][headIdx];
 
     if (isCorrect) {
         score++;
         document.getElementById("top").insertAdjacentHTML("beforeend", "<h2>CORRECT!! 😀</h2>");
     } else {
-        document.getElementById("top").insertAdjacentHTML("beforeend", "<h2>UNLUCKY!! 😢</h2>");
+        document.getElementById("top").insertAdjacentHTML("beforeend", "<h2>UNLUCKY!! 😢</h2><br>");
+		document.getElementById("top").insertAdjacentHTML("beforeend", "<h2>The correct answer was:</h2><br><br>");
+		//document.getElementById("top").insertAdjacentHTML("beforeend", headlineObj.name);
+		const img = document.createElement("img");
+        img.src = paperData[paperIdx].img;
+        img.alt = paperData[paperIdx].name;
+        img.style.width = "300px"; 
+		document.getElementById("buttons").appendChild(img);
+		//document.body.appendChild(img);
     }
+	
 
     summaryArray.push({
         head: headlineObj.title,
