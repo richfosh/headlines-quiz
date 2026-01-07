@@ -24,7 +24,9 @@ const paperData = [
     { name: "Christian Today", url: 'https://www.christiantoday.com/rss.xml', exclusions: ["Christian Today", "Christian", "God", "church", "archbishop", "bishop", "pope"], img: "images/christiantoday.jpg" },
     { name: "The Standard", url: 'https://www.standard.co.uk/news/rss', exclusions: ["Standard", "Evening Standard"], img: "images/standard.jpg" },
     { name: "Pink News", url: 'https://www.thepinknews.com/news/rss', exclusions: ["PinkNews", "Pink News", "trans", "gay", "lesbian", "pink", "queer", "LGBTQ+"], img: "images/pink.jpg" },
-    { name: "The Daily Mail", url: 'https://www.dailymail.co.uk/news/index.rss', exclusions: ["MailOnline", "Daily Mail", "MAIL"], img: "images/mail.png" }
+    { name: "The Daily Mail", url: 'https://www.dailymail.co.uk/news/index.rss', exclusions: ["MailOnline", "Daily Mail", "MAIL"], img: "images/mail.png" },
+	{ name: "The Poke", url: 'https://www.thepoke.com/rss', exclusions: ["Poke"], img: "images/poke.jpg" },
+	{ name: "News Thump", url: 'https://newsthump.com/rss', exclusions: ["Thump"], img: "images/thump.jpg" }
 ];
 
 // ************************************************************
@@ -146,7 +148,7 @@ function start() {
     usedHeadlines.push(correctHeadline);
     // --- END OF CHANGE ---
 
-    document.getElementById("top").insertAdjacentHTML("beforeend", `<h3><em>"${correctHeadline}"</em></h3>`);
+    document.getElementById("top").insertAdjacentHTML("beforeend", `<h3 style="color: DarkCyan;"><em>"${correctHeadline}"</em></h3>`);
 	
 	document.getElementById("choose").insertAdjacentHTML("beforeend", `<h4>Choose one of these papers:</h4>`);
 
