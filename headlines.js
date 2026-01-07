@@ -28,7 +28,7 @@ const paperData = [
 ];
 
 // ************************************************************
-// 2. LOADING ENGINE
+// 2. LOADING ENGINE (Updated for Image Preloading)
 // ************************************************************
 
 async function initGame() {
@@ -36,17 +36,30 @@ async function initGame() {
     
     if(startBtn) {
         startBtn.disabled = true;
-        startBtn.textContent = "Loading Headlines...";
+        // Updated text to reflect both headlines and images are loading
+        startBtn.textContent = "Loading Assets..."; 
     }
 
     paperData.forEach(() => masterArray.push([]));
 
+    // 1. Create promises for Headlines
     const fetchPromises = paperData.map((paper, index) => 
-    getHeadLines(paper.name, paper.url, masterArray[index], paper.exclusions)
-);
+        getHeadLines(paper.name, paper.url, masterArray[index], paper.exclusions)
+    );
+
+    // 2. Create promises for Images
+    const imagePromises = paperData.map(paper => {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.src = paper.img;
+            img.onload = resolve;
+            img.onerror = resolve; // Resolve anyway so the game starts even if an image fails
+        });
+    });
 
     try {
-        await Promise.all(fetchPromises);
+        // Wait for BOTH headlines and images to finish
+        await Promise.all([...fetchPromises, ...imagePromises]);
         
         if(startBtn) {
             startBtn.disabled = false;
