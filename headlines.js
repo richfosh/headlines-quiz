@@ -207,7 +207,7 @@ function finish() {
     clear("top");
     clear("buttons");
     
-    document.getElementById("top").insertAdjacentHTML("beforeend", `<br><h2 style="color: DarkRed;>Final Score: ${score} / ${howManyQs}</h3><hr>`);
+    document.getElementById("top").insertAdjacentHTML("beforeend", `<br><h2 style="color: DarkRed";>Final Score: ${score} / ${howManyQs}</h3><hr>`);
 	
 	// 1. Update Total Count (how many games)
 let totGoes = Number(localStorage.getItem('total')) || 0;
