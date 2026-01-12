@@ -207,8 +207,45 @@ function finish() {
     clear("top");
     clear("buttons");
     
-    document.getElementById("top").insertAdjacentHTML("beforeend", `<br><h3>Final Score: ${score} / ${howManyQs}</h3><hr>`);
+    document.getElementById("top").insertAdjacentHTML("beforeend", `<br><h2 style="color: DarkRed;>Final Score: ${score} / ${howManyQs}</h3><hr>`);
+	
+	// 1. Update Total Count (how many games)
+let totGoes = Number(localStorage.getItem('total')) || 0;
+totGoes++;
+localStorage.setItem('total', totGoes.toString());
 
+// 2. Update Sum of All Scores (casting to Number to avoid "10" + 5 = "105")
+let totalScores = Number(localStorage.getItem('sumofscores')) || 0;
+totalScores += score;
+localStorage.setItem('sumofscores', totalScores.toString());
+
+// 3. Best Score Logic
+let bestScore = localStorage.getItem('best');
+if (bestScore === null || score > Number(bestScore)) {
+    localStorage.setItem('best', score.toString());
+    bestScore = score.toString();
+}
+
+// 4. Lowest Score Logic
+let lowestScore = localStorage.getItem('lowest');
+if (lowestScore === null || score < Number(lowestScore)) {
+    localStorage.setItem('lowest', score.toString());
+    lowestScore = score.toString();
+}
+
+// 5. Calculate Average (Dynamic calculation is safer)
+let averageScore = (totalScores / totGoes).toFixed(1);
+localStorage.setItem('average', averageScore); // Saving it if you need it elsewhere
+
+// 6. Update UI
+const topDiv = document.getElementById("top");
+topDiv.insertAdjacentHTML("beforeend", `
+    <h3>Total quizzes taken by you: ${totGoes}</h3>
+    <h3>Your best score: ${bestScore}</h3>
+    <h3>Your average score: ${averageScore}</h3>
+    <h3>Your lowest score: ${lowestScore}</h3> <hr>
+`);
+	
     summaryArray.forEach((item, index) => {
         const div = document.createElement("div");
         div.className = "summary-item";
